@@ -3,8 +3,7 @@
 function goto {
 	session=$1
 	if ! [ -n "$session" ]; then
-		echo oops
-		exit 1
+		return 1
 	fi
 
 	if [ -n "$TMUX" ]; then
@@ -32,12 +31,22 @@ function choose_session {
 	tmux list-sessions -F '#{session_name}' | fzf --preview="$preview"
 }
 
-function tt {
+function map_s {
+	f="$1"
+	if ! [ -n "$f" ]; then
+		return 1
+	fi
 	session=$(choose_session)
-	goto $session
+	if ! [ -n "$session" ]; then
+		return 0
+	fi
+	$f $session
+}
+
+function tt {
+	map_s goto
 }
 
 function tk {
-	session=$(choose_session)
-	tmux kill-session -t $session
+	map_s "tmux kill-session -t"
 }
