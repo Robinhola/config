@@ -40,11 +40,11 @@ function map_s {
 	if ! [ -n "$session" ]; then
 		return 0
 	fi
-	$f $session
+	eval "$f $session"
 }
 
 function tt {
-	map_s goto
+	map_s "goto"
 }
 
 function tk {
