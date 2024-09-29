@@ -2,10 +2,12 @@
 
 CONFIG="$HOME/.config"
 ZSH_CONFIG="$CONFIG/zsh"
+NVIM_CONFIG="$CONFIG/nvim"
 
 alias vim="nvim"
 
 alias Rprofile="vim $ZSH_CONFIG/aliases.sh"
+alias Rvim="cd $NVIM_CONFIG/; vim $NVIM_CONFIG/; cd -"
 alias Rsource="source $ZSH_CONFIG/aliases.sh"
 
 alias say_done="say done -v Flo"
