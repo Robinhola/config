@@ -1,4 +1,6 @@
 local set = vim.opt
 
-set.relativenumber = true
+set.clipboard = "unnamedplus"
 set.number = true
+set.relativenumber = true
+set.shiftwidth = 4

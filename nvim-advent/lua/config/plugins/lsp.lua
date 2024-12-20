@@ -22,12 +22,12 @@ return {
       },
     },
     config = function(_, opts)
-      -- local lspconfig = require("lspconfig")
-      --
-      -- for server, config in pairs(opts.servers) do
-      --   config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-      --   lspconfig[server].setup(config)
-      -- end
+      local lspconfig = require("lspconfig")
+
+      for server, config in pairs(opts.servers) do
+        config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+        lspconfig[server].setup(config)
+      end
 
       vim.keymap.set("n", "<space>f", function() vim.lsp.buf.format() end)
 
@@ -36,7 +36,7 @@ return {
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if not client then return end
 
-          if client:supports_method('textDocument/formatting') then
+          if client.supports_method('textDocument/formatting') then
             -- Format the current buffer on save
             vim.api.nvim_create_autocmd('BufWritePre', {
               buffer = args.buf,
